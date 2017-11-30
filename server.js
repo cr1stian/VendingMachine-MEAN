@@ -20,11 +20,25 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 
 
+// Mongo Client
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://localhost:27017/vendor');
 
 
-// // CRUD HTTP
-// const company = require('./router/company');
-// app.use(company)
+
+
+
+
+
+
+// Routers
+const vendor = require('./routers/vendor');
+app.use(vendor)
+
+const customer = require('./routers/customer');
+app.use(customer)
+
 
 
 
@@ -32,6 +46,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
 
 
 
