@@ -5,24 +5,16 @@ const model = require("../model/schema.js")
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Get List of All Purchases
+router.get("/api/vendor/purchases", (req, res) => {
+  model.Machine.findOne().then( (data) =>{
+    res.json(data)
+  })
+});
 
 
 // Posting new item in the machine
-router.get('/api/vendor/items', (req, res) => {
+router.post('/api/vendor/items', (req, res) => {
 
   var item = model.Item({
     img: req.body.img ,
@@ -31,12 +23,7 @@ router.get('/api/vendor/items', (req, res) => {
     quantity: req.body.quantity
   })
   item.save()
-
-})
-
-
-
-
+});
 
 
 

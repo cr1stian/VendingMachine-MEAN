@@ -12,25 +12,26 @@ router.get('/api/customer/items', (req, res) => {
 })
 
 
-
+// Post Purchase of item
 router.post('/api/customer/items/:id/purchases', (req, res) => {
-
-    givenMoney: 100   // NEEDS TO BE FIXED !
-    var chag
-// Grabbing Selected
   model.Item.findOne({
     _id: req.params.id
   }).then((data) => {
-
-      data.cost
-
+                      // Updating Quantity
+    data.quantity -= 1
+    data.save()
+                      // Saving Purchase to Log
+    model.Machine.findOne().then((machine) =>{
+      machine.totalMoney += data.cost;
+      machine.itemsSold.push({
+        name: data.name,
+        cost: data.cost,
+        time: Date.now()
+      })
+      machine.save()
+    })
   })
-
-
-})
-
-
-
+});
 
 
 

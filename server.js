@@ -23,7 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false}));
 // Mongo Client
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost:27017/vendor');
+mongoose.connect('mongodb://localhost:27017/vendor', {
+  useMongoClient: true
+});;
 
 
 
@@ -42,7 +44,7 @@ app.use(customer)
 
 
 
-// Send all other requests to the Angular app
+// Send all others to the Angular app
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist/index.html'));
 });

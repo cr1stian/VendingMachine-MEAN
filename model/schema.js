@@ -10,7 +10,7 @@ const itemSchema = new mongoose.Schema({
 // Machine schema
 const machineSchema = new mongoose.Schema({
   totalMoney: {type: Number, required: true},
-  log: []
+  itemsSold: []
 })
 
 module.exports = {
